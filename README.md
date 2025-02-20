@@ -1,36 +1,171 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jira Clone with Next.js and Hono
 
-## Getting Started
+## 🚀 Project Description
 
-First, run the development server:
+This project is a Jira clone built with modern technologies like Next.js 15, Hono, and an elegant user interface using Tailwind CSS and Radix UI.
+
+## 🛠️ Core Technologies
+
+- **Frontend:**
+
+  - Next.js 15.1.7
+  - React 19.0.0
+  - Tailwind CSS 4.0.6
+  - Radix UI (Components)
+  - TypeScript 5.7.3
+
+- **Backend:**
+
+  - Hono 4.7.2
+
+- **Authentication:**
+  - Custom authentication system
+  - OAuth support (Google and GitHub)
+
+## 📋 Prerequisites
+
+- Node.js (recommended version: 18.x or higher)
+- npm or yarn
+- Git
+
+## 🔧 Installation
+
+1. **Clone the repository:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/build-jira-clone.git
+cd build-jira-clone
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+# or
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Configure environment variables:**
+   Create a `.env` file in the project root:
 
-## Learn More
+```env
+# Required environment variables
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Running the Project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Development
+npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Production
+npm run build
+npm start
+```
 
-## Deploy on Vercel
+## 🏗️ Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+build-jira-clone/
+├── app/
+│   ├── (auth)/
+│   │   ├── sign-in/
+│   │   └── sign-up/
+│   ├── api/
+│   └── layout.tsx
+├── components/
+│   ├── ui/
+│   └── dotted-separator.tsx
+├── features/
+│   └── auth/
+├── lib/
+│   └── utils.ts
+└── public/
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔐 Authentication Features
+
+The system includes:
+
+- User registration
+- Login
+- Google authentication
+- GitHub authentication
+- Form validation with Zod
+
+## 🎨 UI Components
+
+The project uses a custom component library based on Radix UI and Tailwind CSS:
+
+- Buttons
+- Forms
+- Cards
+- Inputs
+- Modals
+- Tooltips
+- And more...
+
+## 🌐 API Routes
+
+The API is built with Hono and integrates with Next.js:
+
+```typescript
+import { Hono } from "hono";
+import { handle } from "hono/vercel";
+
+const app = new Hono();
+
+app.get("/", (c) => {
+  return c.json({ message: "Hello World" });
+});
+
+export const GET = handle(app);
+```
+
+## 🎯 Key Features
+
+- Responsive design
+- Light/dark theme
+- Modern and minimalist interface
+- Robust form validation
+- Dynamic routing system
+- Reusable components
+- Query Provider for data fetching
+- Mobile-first approach
+- Custom hooks for enhanced functionality
+- Comprehensive UI component library
+- Type-safe API routes
+
+## 🔄 Project Status
+
+The project is under active development with new features being added regularly.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🤝 Contributing
+
+Contributions are welcome. Please follow these steps:
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📞 Support
+
+If you have any questions or issues, please open an issue in the repository.
+
+## 🙏 Acknowledgments
+
+- Next.js Team
+- Radix UI
+- Tailwind CSS
+- Hono Team
+
+---
+
+Made with ❤️ by Epsaind dev

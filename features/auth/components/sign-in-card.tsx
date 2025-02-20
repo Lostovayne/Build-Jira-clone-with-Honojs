@@ -8,28 +8,39 @@ import { FcGoogle } from "react-icons/fc";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(1, "required"),
-});
+import { useLogin } from "../api/use-login";
+import { loginSchema } from "../schemas";
 
 export const SignInCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useLogin();  // Solo una declaración con todos los valores que necesitamos
+
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = (values: z.infer<typeof loginSchema>) => {
+    mutate({ json: values }, {
+      onError: (error) => {
+        console.error('Login error:', error);
+      },
+      onSuccess: (data) => {
+        console.log('Login successful:', data);
+      }
+    });
   };
-
   return (
     <Card className="size-full md:w-[487px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">
@@ -47,7 +58,11 @@ export const SignInCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} type="email" placeholder="Enter email address" />
+                    <Input
+                      {...field}
+                      type="email"
+                      placeholder="Enter email address"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -60,13 +75,17 @@ export const SignInCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} type="password" placeholder="Enter password" />
+                    <Input
+                      {...field}
+                      type="password"
+                      placeholder="Enter password"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button disabled={false} size={"lg"} className="w-full">
+            <Button type="submit" disabled={false} size={"lg"} className="w-full">
               Login
             </Button>
           </form>
