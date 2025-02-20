@@ -8,19 +8,29 @@ import { FcGoogle } from "react-icons/fc";
 
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-const formSchema = z.object({
-  name: z.string().trim().min(1, "Name is required"),
-  email: z.string().email(),
-  password: z.string().min(8, "Miniumum of 8  characters required").max(256),
-});
+import { useRegister } from "../api/use-register";
+import { registerSchema } from "../schemas";
 
 export const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useRegister();
+
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -28,8 +38,8 @@ export const SignUpCard = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = (values: z.infer<typeof registerSchema>) => {
+    mutate({ json: values });
   };
 
   return (
@@ -59,7 +69,11 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} type="text" placeholder="Enter your name" />
+                    <Input
+                      {...field}
+                      type="text"
+                      placeholder="Enter your name"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -71,7 +85,11 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} type="email" placeholder="Enter email address" />
+                    <Input
+                      {...field}
+                      type="email"
+                      placeholder="Enter email address"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -83,7 +101,11 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} type="password" placeholder="Enter password" />
+                    <Input
+                      {...field}
+                      type="password"
+                      placeholder="Enter password"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
