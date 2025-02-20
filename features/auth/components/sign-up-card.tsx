@@ -8,20 +8,8 @@ import { FcGoogle } from "react-icons/fc";
 
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
@@ -71,11 +59,7 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      placeholder="Enter your name"
-                    />
+                    <Input {...field} type="text" placeholder="Enter your name" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -87,11 +71,7 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="email"
-                      placeholder="Enter email address"
-                    />
+                    <Input {...field} type="email" placeholder="Enter email address" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -103,11 +83,7 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="password"
-                      placeholder="Enter password"
-                    />
+                    <Input {...field} type="password" placeholder="Enter password" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -131,6 +107,17 @@ export const SignUpCard = () => {
           <FaGithub className="mr-2 size-5" />
           Login with Github
         </Button>
+      </CardContent>
+      <div className="px-7">
+        <DottedSeparator />
+      </div>
+      <CardContent className="p-7 flex items-center justify-center">
+        <p>
+          Already have an account?{" "}
+          <Link href="/sign-in">
+            <span className="text-blue-700"> &nbsp;Sign in</span>
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
