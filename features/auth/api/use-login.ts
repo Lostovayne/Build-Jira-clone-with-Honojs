@@ -10,20 +10,20 @@ export const useLogin = () => {
     mutationFn: async (data) => {
       try {
         if (!data || !data.json) {
-          throw new Error('Invalid login data');
+          throw new Error("Invalid login data");
         }
-        
+
         const response = await client.api.auth.login.$post({
-          json: data.json
+          json: data.json,
         });
 
         if (!response.ok) {
-          throw new Error('Login failed');
+          throw new Error("Login failed");
         }
 
         return response.json();
       } catch (error) {
-        console.error('Login error:', error);
+        console.error("Login error:", error);
         throw error;
       }
     },
